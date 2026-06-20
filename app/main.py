@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 
 from app.basededatos import Base, engine, SessionLocal
 from app.models.user import Usuario
-from app.schemas.user_schema import UsuarioRegistro
+from app.schemas.user_schema import UsuarioRegistro, UsuarioLogin
 
 Base.metadata.create_all(bind=engine)
 
@@ -38,4 +38,24 @@ def registro(usuario: UsuarioRegistro):
     return {
         "mensaje": "Usuario registrado correctamente",
         "id": nuevo_usuario.id
+    }
+@app.post("/login")
+def login(datos: UsuarioLogin):
+
+    db: Session = SessionLocal()
+
+    usuario = db.query(Usuario).filter(
+        Usuario.email == datos.email,
+        Usuario.password == datos.password
+    ).first()
+
+    if not usuario:
+        return {
+            "mensaje": "Credenciales incorrectas"
+        }
+
+    return {
+        "mensaje": "Inicio de sesión exitoso",
+        "usuario": usuario.nombre,
+        "rol": usuario.rol
     }

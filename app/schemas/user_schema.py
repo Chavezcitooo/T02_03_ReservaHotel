@@ -6,3 +6,7 @@ class UsuarioRegistro(BaseModel):
     telefono: str
     password: str
     rol: str
+    
+class UsuarioLogin(BaseModel):
+    email: str
+    password: str
