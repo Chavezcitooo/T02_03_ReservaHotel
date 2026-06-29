@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from app.schemas.habitacion_schema import HabitacionCreate
-
+# Endpoint para gestionar habitacione
 router = APIRouter()
 
 habitaciones = []
