@@ -1,5 +1,4 @@
-from fastapi import APIRouter
-from app.models.habitacion import Habitacion
+from fastapi import APIRouter, HTTPException
 from app.schemas.habitacion_schema import HabitacionCreate
 
 router = APIRouter()
@@ -10,7 +9,7 @@ habitaciones = []
 def crear_habitacion(habitacion: HabitacionCreate):
     nueva = {
         "id": len(habitaciones) + 1,
-        **habitacion.dict()
+        **habitacion.model_dump()
     }
     habitaciones.append(nueva)
     return nueva
@@ -24,15 +23,15 @@ def obtener_habitacion(id: int):
     for h in habitaciones:
         if h["id"] == id:
             return h
-    return {"error": "No encontrada"}
+    raise HTTPException(status_code=404, detail="No encontrada")
 
 @router.put("/habitaciones/{id}")
 def actualizar_habitacion(id: int, habitacion: HabitacionCreate):
     for h in habitaciones:
         if h["id"] == id:
-            h.update(habitacion.dict())
+            h.update(habitacion.model_dump())
             return h
-    return {"error": "No encontrada"}
+    raise HTTPException(status_code=404, detail="No encontrada")
 
 @router.delete("/habitaciones/{id}")
 def eliminar_habitacion(id: int):
@@ -40,4 +39,4 @@ def eliminar_habitacion(id: int):
         if h["id"] == id:
             habitaciones.remove(h)
             return {"mensaje": "Eliminada"}
-    return {"error": "No encontrada"}
+    raise HTTPException(status_code=404, detail="No encontrada")
