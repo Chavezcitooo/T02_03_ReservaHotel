@@ -5,12 +5,20 @@ from app.basededatos import Base, engine, SessionLocal
 from app.models.user import Usuario
 from app.schemas.user_schema import UsuarioRegistro, UsuarioLogin
 
-Base.metadata.create_all(bind=engine)
+
+from app.habitaciones import router as habitaciones_router
+
 
 app = FastAPI(
     title="Sistema de Reservas de Hoteles",
     version="1.0.0"
 )
+
+
+app.include_router(habitaciones_router)
+
+
+Base.metadata.create_all(bind=engine)
 
 @app.get("/")
 def inicio():
@@ -39,6 +47,7 @@ def registro(usuario: UsuarioRegistro):
         "mensaje": "Usuario registrado correctamente",
         "id": nuevo_usuario.id
     }
+
 @app.post("/login")
 def login(datos: UsuarioLogin):
 
