@@ -5,6 +5,9 @@ from app.basededatos import Base, engine, SessionLocal
 from app.models.user import Usuario
 from app.schemas.user_schema import UsuarioRegistro, UsuarioLogin
 
+from app.models.habitacion import Habitacion
+from app.models.pago import Pago
+from app.reserva import Reserva
 
 from app.habitaciones import router as habitaciones_router
 from app.pagos import router as pagos_router

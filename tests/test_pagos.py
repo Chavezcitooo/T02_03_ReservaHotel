@@ -1,4 +1,5 @@
 import unittest
+import uuid
 from fastapi.testclient import TestClient
 from app.main import app
 
@@ -25,17 +26,18 @@ class TestPagos(unittest.TestCase):
         )
 
     def test_registrar_pago_correctamente(self):
-
+        correo = f"{uuid.uuid4()}@test.com"
         usuario = client.post(
             "/registro",
             json={
-                "nombre": "Juan",
-                "email": "juan@test.com",
+                "nombre": "Mario",
+                "email": correo,
                 "telefono": "0999999999",
-                "password": "123456",
+                "password": "12345678",
                 "rol": "cliente"
             }
         )
+        
 
         usuario_id = usuario.json()["id"]
 
