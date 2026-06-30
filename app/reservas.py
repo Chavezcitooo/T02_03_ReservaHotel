@@ -35,10 +35,29 @@ def crear_reserva(reserva: ReservaCreate, db: Session = Depends(get_db)):
     # Una reserva choca si se solapa en el tiempo con otra reserva para la misma habitación
     # que no esté 'cancelada'.
     # Condición de solapamiento: (inicio1 < fin2) Y (inicio2 < fin1)
+    print(f"\n[DIAGNÓSTICO] Intentando reservar la habitación ID: {reserva.habitacion_id}")
+    fantasmas = db.query(ReservaModel).filter(ReservaModel.habitacion_id == reserva.habitacion_id).all()
+    
+    if not fantasmas:
+        print("[DIAGNÓSTICO] La habitación está limpia. No hay reservas previas.")
+    else:
+        for f in fantasmas:
+            print(f"[DIAGNÓSTICO] Encontré reserva previa -> ID: {f.id}, Estado: {f.estado}, Fechas: {f.fecha_inicio} a {f.fecha_fin}")
+    # -------------------------------------------
+
+    # 3. Comprobar si existe una reserva conflictiva (choque de fechas).
     reserva_conflictiva = db.query(ReservaModel).filter(
         and_(
             ReservaModel.habitacion_id == reserva.habitacion_id,
-            ReservaModel.estado != 'cancelada',
+            ReservaModel.estado != EstadoReserva.CANCELADA,
+            ReservaModel.fecha_inicio < reserva.fecha_fin,
+            ReservaModel.fecha_fin > reserva.fecha_inicio
+        )
+    ).first()
+    reserva_conflictiva = db.query(ReservaModel).filter(
+        and_(
+            ReservaModel.habitacion_id == reserva.habitacion_id,
+            ReservaModel.estado != EstadoReserva.CANCELADA, 
             ReservaModel.fecha_inicio < reserva.fecha_fin,
             ReservaModel.fecha_fin > reserva.fecha_inicio
         )

@@ -1,24 +1,25 @@
 import unittest
 import uuid
+import random
 from fastapi.testclient import TestClient
 from app.main import app
 
 client = TestClient(app)
 
-
 class TestPagos(unittest.TestCase):
 
     def test_pago_reserva_inexistente(self):
-
+        # Intentamos pagar una reserva con un ID altísimo que seguro no existe
         response = client.post(
             "/pagos/",
             json={
-                "reserva_id": 999,
+                "reserva_id": 999999, 
                 "monto": 100,
                 "metodo_pago": "Tarjeta"
             }
         )
 
+        # Debería saltar un error 404
         self.assertEqual(response.status_code, 404)
         self.assertEqual(
             response.json()["detail"],
@@ -26,6 +27,7 @@ class TestPagos(unittest.TestCase):
         )
 
     def test_registrar_pago_correctamente(self):
+        # Correo dinámico para evitar el error de "usuario ya existe" si corremos el test varias veces
         correo = f"{uuid.uuid4()}@test.com"
         usuario = client.post(
             "/registro",
@@ -38,13 +40,13 @@ class TestPagos(unittest.TestCase):
             }
         )
         
-
         usuario_id = usuario.json()["id"]
+        numero_habitacion = random.randint(1000, 9999)
 
         habitacion = client.post(
             "/habitaciones",
             json={
-                "numero": 500,
+                "numero": numero_habitacion,
                 "tipo": "Simple",
                 "precio": 50,
                 "disponible": True
@@ -53,6 +55,7 @@ class TestPagos(unittest.TestCase):
 
         habitacion_id = habitacion.json()["id"]
 
+        # Ahora sí, reservamos la habitación nueva
         reserva = client.post(
             "/reservas/",
             json={
@@ -62,11 +65,14 @@ class TestPagos(unittest.TestCase):
                 "fecha_fin": "2026-07-05"
             }
         )
-
+        #Print para ver el error
+        print(f"\n--- LOG DE ERROR: {reserva.json()} ---\n")
+        
         self.assertEqual(reserva.status_code, 201)
 
         reserva_id = reserva.json()["id"]
 
+        # Finalmente mandamos el pago
         pago = client.post(
             "/pagos/",
             json={
@@ -76,10 +82,10 @@ class TestPagos(unittest.TestCase):
             }
         )
 
+        # Validamos que todo haya guardado bien
         self.assertEqual(pago.status_code, 200)
 
         datos = pago.json()
-
         self.assertEqual(datos["reserva_id"], reserva_id)
         self.assertEqual(datos["monto"], 200)
         self.assertEqual(datos["metodo_pago"], "Tarjeta")
