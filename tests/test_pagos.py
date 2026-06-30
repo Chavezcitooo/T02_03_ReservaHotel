@@ -10,12 +10,15 @@ class TestPagos(unittest.TestCase):
 if __name__ == "__main__":
     unittest.main()
 
-def test_registrar_pago_correctamente(self):
-    # Crear usuario
-    # Crear habitación
-    # Crear reserva
-    # Registrar pago
+def test_pago_reserva_inexistente(self):
 
-    self.assertEqual(pago.status_code, 200)
+    response = client.post(
+        "/pagos/",
+        json={
+            "reserva_id":999,
+            "monto":100,
+            "metodo_pago":"Tarjeta"
+        }
+    )
 
-    
+    self.assertEqual(response.status_code,404)

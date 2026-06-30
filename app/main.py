@@ -7,7 +7,7 @@ from app.schemas.user_schema import UsuarioRegistro, UsuarioLogin
 
 
 from app.habitaciones import router as habitaciones_router
-
+from app.pagos import router as pagos_router
 
 app = FastAPI(
     title="Sistema de Reservas de Hoteles",
@@ -16,7 +16,7 @@ app = FastAPI(
 
 
 app.include_router(habitaciones_router)
-
+app.include_router(pagos_router)
 
 Base.metadata.create_all(bind=engine)
 
