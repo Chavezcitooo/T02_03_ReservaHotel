@@ -22,3 +22,8 @@ def test_pago_reserva_inexistente(self):
     )
 
     self.assertEqual(response.status_code,404)
+
+    self.assertEqual(
+    response.json()["detail"],
+    "Reserva no encontrada"
+)
