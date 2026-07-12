@@ -47,6 +47,7 @@ cd T02_03_ReservaHotel
 ## Instalar dependencias
 pip install fastapi sqlalchemy uvicorn pytest httpx
 ```
+
 ## Ejecución del servidor
 
 Desde la raíz del proyecto ejecutar:
@@ -57,6 +58,7 @@ uvicorn app.main:app --reload
 ##La aplicación estará disponible en:
 http://127.0.0.1:8000
 ```
+
 ## Documentación Swagger
 
 FastAPI genera automáticamente la documentación de los servicios.
@@ -66,10 +68,13 @@ Swagger UI:
 ```text
 http://127.0.0.1:8000/docs
 ```
+
 Documentación alternativa:
+
 ```text
 http://127.0.0.1:8000/redoc
 ```
+
 ## Módulos del sistema
 
 ### Usuarios
@@ -90,19 +95,19 @@ Permite registrar pagos asociados a una reserva existente. Al registrar un pago,
 
 ## Endpoints principales
 
-| Método | Endpoint | Descripción |
-|---|---|---|
-| POST | `/registro` | Registrar un usuario |
-| POST | `/login` | Iniciar sesión |
-| POST | `/habitaciones` | Crear una habitación |
-| GET | `/habitaciones` | Listar habitaciones |
-| GET | `/habitaciones/{id}` | Buscar habitación por ID |
-| PUT | `/habitaciones/{id}` | Actualizar habitación |
-| DELETE | `/habitaciones/{id}` | Eliminar habitación |
-| POST | `/reservas/` | Crear una reserva |
-| PATCH | `/reservas/{id}/cancelar` | Cancelar una reserva |
-| PATCH | `/reservas/{id}/confirmar` | Confirmar una reserva |
-| POST | `/pagos/` | Registrar un pago |
+| Método | Endpoint                   | Descripción              |
+| ------ | -------------------------- | ------------------------ |
+| POST   | `/registro`                | Registrar un usuario     |
+| POST   | `/login`                   | Iniciar sesión           |
+| POST   | `/habitaciones`            | Crear una habitación     |
+| GET    | `/habitaciones`            | Listar habitaciones      |
+| GET    | `/habitaciones/{id}`       | Buscar habitación por ID |
+| PUT    | `/habitaciones/{id}`       | Actualizar habitación    |
+| DELETE | `/habitaciones/{id}`       | Eliminar habitación      |
+| POST   | `/reservas/`               | Crear una reserva        |
+| PATCH  | `/reservas/{id}/cancelar`  | Cancelar una reserva     |
+| PATCH  | `/reservas/{id}/confirmar` | Confirmar una reserva    |
+| POST   | `/pagos/`                  | Registrar un pago        |
 
 ## Pruebas automáticas
 
@@ -111,11 +116,43 @@ Para ejecutar todas las pruebas:
 ```bash
 python -m pytest -v
 ```
+
 Para ejecutar únicamente las pruebas de habitaciones:
+
 ```bash
 python -m pytest tests/test_habitacion.py -v
 ```
+
 Para ejecutar únicamente las pruebas de pagos:
+
 ```bash
 python -m pytest tests/test_pagos.py -v
+```
+
+## Estructura del proyecto
+
+```text
+T02_03_ReservaHotel/
+├── app/
+│   ├── models/
+│   ├── schemas/
+│   ├── basededatos.py
+│   ├── habitaciones.py
+│   ├── reservas.py
+│   ├── pagos.py
+│   └── main.py
+├── tests/
+│   ├── test_habitacion.py
+│   └── test_pagos.py
+├── README.md
+└── .gitignore
+```
+
+## Integrantes
+
+```text
+Elkin Mendoza
+Erly Morales
+Roberth Ruiz
+Joel Chávez
 ```
