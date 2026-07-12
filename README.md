@@ -33,3 +33,16 @@ Antes de ejecutar el proyecto se debe contar con:
 - pip instalado.
 - Git instalado.
 - Un editor de código como Visual Studio Code o Cursor.
+
+## Instalación
+
+Clonar el repositorio:
+
+```bash
+git clone https://github.com/Chavezcitooo/T02_03_ReservaHotel.git
+
+## Entrar a la carpeta
+cd T02_03_ReservaHotel
+
+## Instalar dependencias
+pip install fastapi sqlalchemy uvicorn pytest httpx
