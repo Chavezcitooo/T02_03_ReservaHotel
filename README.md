@@ -87,3 +87,19 @@ Permite crear reservas, cancelar reservas, confirmar reservas y evitar conflicto
 ### Pagos
 
 Permite registrar pagos asociados a una reserva existente. Al registrar un pago, la reserva cambia de estado pendiente a confirmada.
+
+## Endpoints principales
+
+| Método | Endpoint | Descripción |
+|---|---|---|
+| POST | `/registro` | Registrar un usuario |
+| POST | `/login` | Iniciar sesión |
+| POST | `/habitaciones` | Crear una habitación |
+| GET | `/habitaciones` | Listar habitaciones |
+| GET | `/habitaciones/{id}` | Buscar habitación por ID |
+| PUT | `/habitaciones/{id}` | Actualizar habitación |
+| DELETE | `/habitaciones/{id}` | Eliminar habitación |
+| POST | `/reservas/` | Crear una reserva |
+| PATCH | `/reservas/{id}/cancelar` | Cancelar una reserva |
+| PATCH | `/reservas/{id}/confirmar` | Confirmar una reserva |
+| POST | `/pagos/` | Registrar un pago |
