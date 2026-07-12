@@ -24,3 +24,12 @@ El sistema permite registrar usuarios, administrar habitaciones, crear reservas 
 - Unittest
 - Swagger/OpenAPI
 - Git y GitHub
+
+## Requisitos previos
+
+Antes de ejecutar el proyecto se debe contar con:
+
+- Python 3.10 o superior.
+- pip instalado.
+- Git instalado.
+- Un editor de código como Visual Studio Code o Cursor.
