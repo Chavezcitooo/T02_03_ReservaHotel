@@ -1,27 +1,21 @@
-# Entornos virtuales
+# Entorno virtual
 venv/
-.venv/
-env/
 
-# Archivos de Python
+# Python
 __pycache__/
 *.pyc
-*.pyo
+
+# Base de datos SQLite
+reservas_hotel.db
 
 # Pytest
 .pytest_cache/
 
-# Cobertura
-.coverage
-htmlcov/
-
-# Base de datos local
-*.db
-
-# Configuración del editor
+# VS Code
 .vscode/
+
+# JetBrains
 .idea/
 
-# Archivos del sistema
-.DS_Store
-Thumbs.db
+# Variables de entorno
+.env
