@@ -46,3 +46,14 @@ cd T02_03_ReservaHotel
 
 ## Instalar dependencias
 pip install fastapi sqlalchemy uvicorn pytest httpx
+```
+## Ejecución del servidor
+
+Desde la raíz del proyecto ejecutar:
+
+```bash
+uvicorn app.main:app --reload
+
+##La aplicación estará disponible en:
+http://127.0.0.1:8000
+```
