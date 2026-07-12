@@ -11,3 +11,16 @@ El sistema permite registrar usuarios, administrar habitaciones, crear reservas 
 - Registrar pagos asociados a reservas existentes.
 - Documentar los endpoints mediante Swagger.
 - Implementar pruebas automáticas para los principales módulos.
+
+## Tecnologías utilizadas
+
+- Python
+- FastAPI
+- SQLAlchemy
+- SQLite
+- Pydantic
+- Uvicorn
+- Pytest
+- Unittest
+- Swagger/OpenAPI
+- Git y GitHub
