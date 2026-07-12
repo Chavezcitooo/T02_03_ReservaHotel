@@ -70,3 +70,20 @@ Documentación alternativa:
 ```text
 http://127.0.0.1:8000/redoc
 ```
+## Módulos del sistema
+
+### Usuarios
+
+Permite registrar usuarios y validar el inicio de sesión.
+
+### Habitaciones
+
+Permite crear, listar, buscar, actualizar y eliminar habitaciones.
+
+### Reservas
+
+Permite crear reservas, cancelar reservas, confirmar reservas y evitar conflictos de fechas.
+
+### Pagos
+
+Permite registrar pagos asociados a una reserva existente. Al registrar un pago, la reserva cambia de estado pendiente a confirmada.
