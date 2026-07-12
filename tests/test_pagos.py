@@ -6,6 +6,12 @@ from app.main import app
 
 client = TestClient(app)
 
+"""
+Pruebas automáticas del módulo de pagos.
+
+Se verifica el registro correcto de un pago y el rechazo
+de pagos asociados a reservas inexistentes.
+"""
 class TestPagos(unittest.TestCase):
 
     def test_pago_reserva_inexistente(self):
