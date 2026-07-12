@@ -57,3 +57,16 @@ uvicorn app.main:app --reload
 ##La aplicación estará disponible en:
 http://127.0.0.1:8000
 ```
+## Documentación Swagger
+
+FastAPI genera automáticamente la documentación de los servicios.
+
+Swagger UI:
+
+```text
+http://127.0.0.1:8000/docs
+```
+Documentación alternativa:
+```text
+http://127.0.0.1:8000/redoc
+```
