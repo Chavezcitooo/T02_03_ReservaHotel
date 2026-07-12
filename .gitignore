@@ -1,4 +1,27 @@
+# Entornos virtuales
 venv/
+.venv/
+env/
+
+# Archivos de Python
 __pycache__/
 *.pyc
-reservas_hotel.db
+*.pyo
+
+# Pytest
+.pytest_cache/
+
+# Cobertura
+.coverage
+htmlcov/
+
+# Base de datos local
+*.db
+
+# Configuración del editor
+.vscode/
+.idea/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
