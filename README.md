@@ -103,3 +103,19 @@ Permite registrar pagos asociados a una reserva existente. Al registrar un pago,
 | PATCH | `/reservas/{id}/cancelar` | Cancelar una reserva |
 | PATCH | `/reservas/{id}/confirmar` | Confirmar una reserva |
 | POST | `/pagos/` | Registrar un pago |
+
+## Pruebas automáticas
+
+Para ejecutar todas las pruebas:
+
+```bash
+python -m pytest -v
+```
+Para ejecutar únicamente las pruebas de habitaciones:
+```bash
+python -m pytest tests/test_habitacion.py -v
+```
+Para ejecutar únicamente las pruebas de pagos:
+```bash
+python -m pytest tests/test_pagos.py -v
+```
