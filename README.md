@@ -59,6 +59,22 @@ uvicorn app.main:app --reload
 http://127.0.0.1:8000
 ```
 
+## Instalación y Ejecución del Frontend (React)
+
+Desde la raíz del proyecto, navega a la carpeta `frontend` e instala las dependencias:
+
+```bash
+cd frontend
+npm install
+```
+
+```bash
+uvicorn app.main:app --reload
+
+##La aplicación estará disponible en:
+http://127.0.0.1:8000
+```
+
 ## Documentación Swagger
 
 FastAPI genera automáticamente la documentación de los servicios.
@@ -155,4 +171,11 @@ Elkin Mendoza
 Erly Morales
 Roberth Ruiz
 Joel Chávez
+```
+
+Para ejecutar el servidor de desarrollo del frontend:
+
+```bash
+cd frontend
+npm run dev
 ```
