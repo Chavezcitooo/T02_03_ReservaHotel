@@ -6,6 +6,8 @@ import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import HabitacionesPage from "./pages/HabitacionesPage.jsx";
+import ReservasPage from "./pages/ReservasPage.jsx";
+import PagosPage from "./pages/PagosPage.jsx";
 import "./App.css";
 
 function App() {
@@ -20,6 +22,8 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/registro" element={<Register />} />
             <Route path="/habitaciones" element={<HabitacionesPage />} />
+            <Route path="/reservas" element={<ReservasPage />} />
+            <Route path="/pagos" element={<PagosPage />} />
           </Routes>
         </main>
         <Footer />
