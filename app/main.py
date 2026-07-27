@@ -13,11 +13,22 @@ from app.habitaciones import router as habitaciones_router
 from app.pagos import router as pagos_router
 from app.reservas import router as reservas_router
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI(
     title="Sistema de Reservas de Hoteles",
     version="1.0.0"
 )
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.include_router(habitaciones_router)
 app.include_router(pagos_router)
