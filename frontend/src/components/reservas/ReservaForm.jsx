@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { obtenerHabitaciones } from "../../services/habitacionesService";
+import { obtenerUsuarios } from "../../services/usuariosService";
 
 const formularioInicial = {
   usuario_id: "",
@@ -11,13 +12,14 @@ const formularioInicial = {
 
 function ReservaForm({ onGuardar }) {
   const [formulario, setFormulario] = useState(formularioInicial);
-  const [habitaciones, setHabitaciones] = useState([]);
-  const [cargandoHabitaciones, setCargandoHabitaciones] = useState(false);
-  const [error, setError] = useState("");
 
-  useEffect(() => {
-    cargarHabitaciones();
-  }, []);
+  const [habitaciones, setHabitaciones] = useState([]);
+  const [usuarios, setUsuarios] = useState([]);
+
+  const [cargandoHabitaciones, setCargandoHabitaciones] = useState(false);
+  const [cargandoUsuarios, setCargandoUsuarios] = useState(false);
+
+  const [error, setError] = useState("");
 
   const cargarHabitaciones = async () => {
     try {
@@ -32,6 +34,25 @@ function ReservaForm({ onGuardar }) {
       setCargandoHabitaciones(false);
     }
   };
+
+  const cargarUsuarios = async () => {
+    try {
+      setCargandoUsuarios(true);
+
+      const datos = await obtenerUsuarios();
+
+      setUsuarios(datos);
+    } catch {
+      setError("No se pudieron cargar los usuarios.");
+    } finally {
+      setCargandoUsuarios(false);
+    }
+  };
+
+  useEffect(() => {
+    cargarUsuarios();
+    cargarHabitaciones();
+  }, []);
 
   const manejarCambio = (evento) => {
     const { name, value } = evento.target;
@@ -57,7 +78,8 @@ function ReservaForm({ onGuardar }) {
     }
 
     if (
-      new Date(formulario.fecha_inicio) >= new Date(formulario.fecha_fin)
+      new Date(formulario.fecha_inicio) >=
+      new Date(formulario.fecha_fin)
     ) {
       setError("La fecha inicial debe ser menor que la fecha final.");
       return;
@@ -87,15 +109,25 @@ function ReservaForm({ onGuardar }) {
         <div className="grupo-formulario">
           <label htmlFor="usuario_id">Usuario</label>
 
-          <input
+          <select
             id="usuario_id"
             name="usuario_id"
-            type="number"
-            min="1"
             value={formulario.usuario_id}
             onChange={manejarCambio}
-            placeholder="Ejemplo: 1"
-          />
+            disabled={cargandoUsuarios}
+          >
+            <option value="">
+              {cargandoUsuarios
+                ? "Cargando usuarios..."
+                : "Seleccione un usuario"}
+            </option>
+
+            {usuarios.map((usuario) => (
+              <option key={usuario.id} value={usuario.id}>
+                {usuario.nombre} - {usuario.email}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className="grupo-formulario">
