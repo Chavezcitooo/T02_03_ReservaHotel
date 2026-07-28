@@ -41,6 +41,24 @@ def inicio():
     return {
         "mensaje": "Sistema de Reservas de Hoteles funcionando correctamente"
     }
+@app.get("/usuarios")
+def listar_usuarios():
+    db: Session = SessionLocal()
+
+    try:
+        usuarios = db.query(Usuario).all()
+
+        return [
+            {
+                "id": usuario.id,
+                "nombre": usuario.nombre,
+                "email": usuario.email,
+                "rol": usuario.rol,
+            }
+            for usuario in usuarios
+        ]
+    finally:
+        db.close()
 
 @app.post("/registro")
 def registro(usuario: UsuarioRegistro):
